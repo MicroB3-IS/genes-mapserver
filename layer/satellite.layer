@@ -1,0 +1,33 @@
+#
+#Layer satellite image, MODIS
+#
+LAYER
+  NAME satellite
+
+  METADATA
+    "wms_title"  "MODIS Satellite"
+    "unit"       "false"
+  END #end of wms metadata
+
+  DATA data/satellite.png
+  TYPE RASTER
+  STATUS OFF
+END
+
+#
+#Layer satellite_mod image, MODIS added for testing
+#
+
+LAYER
+  NAME satellite_mod
+
+  METADATA
+    "wms_title"     "World Map Lite"
+    "unit"          "false"
+  END #end of wms metadata
+
+  DATA data/satelliteMod.png
+  TYPE RASTER
+  STATUS ON
+END
+

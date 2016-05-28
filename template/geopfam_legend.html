@@ -1,0 +1,29 @@
+[leg_header_html]
+	<table>
+[/leg_header_html]
+
+	[leg_layer_html order_metadata=legend_ORDER opt_flag=0]
+		<tr>
+			<td style="text-align:center;font-weight:bold;">[metadata name=WMS_TITLE]</td>
+		</tr>
+		[if name=unit oper=neq value=false]
+			<tr>
+				<td style="text-align:left;">Unit: [metadata name=UNIT_HTML]</td>
+			</tr>
+		[/if]
+		</table>
+	<table>
+		<tr>
+	[/leg_layer_html]
+
+
+	[leg_class_html ]
+
+			<td style="text-align:left;"><img src="[leg_icon]" style="border: 1px solid #dedede; vertical-align: middle;margin-left:10px;"/> [leg_class_name]</td>
+
+	[/leg_class_html]
+
+[leg_footer_html]
+		</tr>	
+</table>
+[/leg_footer_html]

@@ -1,0 +1,44 @@
+#
+# Layer sampling sites
+#
+LAYER
+  NAME samplingsites
+  ##GROUP show
+  METADATA
+    "wms_title"  "Sampling Sites"
+    "wfs_title"  "Sampling Sites WFS"
+    "wms_feature_info_mime_type" "text/html"
+    "gml_featureid" "label" ## REQUIRED
+    "gml_include_items" "all"  ## Optional (serves all attributes for layer)
+    "gml_geometries" "geom"
+    "gml_geom_type" "point"
+    "unit" "false"
+  END #end of wms metadata
+
+  INCLUDE "postgis-connection.inc"
+  DATA 'geom from web_r8.gms_samples as t USING UNIQUE sid USING SRID=4326'
+
+  EXTENT -180 -90 180 90
+
+  STATUS OFF
+  DEBUG 2
+  
+  TYPE POINT
+  TOLERANCE 8
+  TOLERANCEUNITS pixels
+  #TRANSPARENCY 60
+  LABELITEM entity_name
+
+
+  CLASS
+    # template for GetFeatureInfo request
+    TEMPLATE "etc/ssinfo.html"
+    STYLE
+      SYMBOL "circle"
+      SIZE 8
+      OUTLINECOLOR 255 255 255
+      COLOR 255 0 0
+    END
+  END
+#end layer sampling sites
+END

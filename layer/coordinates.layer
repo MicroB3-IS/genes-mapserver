@@ -1,0 +1,43 @@
+#
+#Layer coordinates
+#
+LAYER
+  NAME coordinates
+
+  METADATA
+    "wms_title" "Coordinate Grid"
+    "unit" "false"
+  END #end of wms metadata
+
+  INCLUDE "postgis-connection.inc"
+  DATA "geom from (select geom , label, (substring(label from '^[0-9]*')::integer)%30 as c from mflayers.coordinates) as h using unique label using srid=-1"
+  STATUS OFF
+  DEBUG ON
+  TYPE LINE
+  LABELITEM "label"
+
+  #draw each 30 degree with a black line
+  CLASS
+    EXPRESSION ([c] = 0)
+    STYLE
+      COLOR 80 80 80
+    END
+    LABEL
+      ANGLE auto
+      SIZE 8
+      COLOR 0 0 0
+      TYPE truetype
+      FONT arial
+      FORCE false
+      POSITION AUTO
+    END
+  END
+
+  #draw all others grey
+  CLASS
+    STYLE
+      OUTLINECOLOR 150 150 150
+    END
+  END
+#end layer coordinate grid
+END

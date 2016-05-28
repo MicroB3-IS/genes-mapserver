@@ -1,0 +1,112 @@
+LAYER
+  NAME geopfam
+
+  METADATA
+    "wms_title"	"Geographic PFAM distribution"
+    "unit"         "num hits"
+    "unit_html"    "num hits"
+
+  END #end of wms metadata
+
+  STATUS ON
+  DEBUG ON
+  TYPE POINT
+
+  INCLUDE  "postgis-connection.inc"
+
+  DATA "geom from afernand.geopfam using unique geom using srid=4326"
+
+  VALIDATION
+    'PFAM_ACCESSION' '^[A-Z0-9a-z_-]*$'
+  END
+
+  FILTER "target_accession='%PFAM_ACCESSION%'"
+
+  TOLERANCE 8
+  TOLERANCEUNITS pixels
+
+  LABELITEM "sample_name" 
+
+ 
+  CLASS
+    NAME ">0 - 100"
+    EXPRESSION ( [num_hits] >=  0 AND [num_hits] <100  )
+    STYLE
+       SYMBOL "circle"
+       SIZE 8
+      COLOR 251 240 237
+    END
+  END
+
+ CLASS
+    NAME ">100 - 250"
+    EXPRESSION ( [num_hits] >= 100 AND [num_hits] < 250 )
+    STYLE
+       SYMBOL "circle"
+       SIZE 8
+      COLOR 248 220 227
+    END
+ END
+
+ CLASS
+    NAME ">250 - 750"
+    EXPRESSION ( [num_hits] >= 250 AND [num_hits] < 750)
+    STYLE
+       SYMBOL "circle"
+       SIZE 8
+       COLOR 244 205 196
+    END
+  END
+
+   CLASS
+    NAME ">750 - 1250"
+    EXPRESSION ( [num_hits] >= 750 AND [num_hits] < 1250 )
+    STYLE
+       SYMBOL "circle"
+       SIZE 8
+  
+    COLOR 238 171 155
+    END
+  END
+
+   CLASS
+    NAME ">1250 - 2500"
+    EXPRESSION ( [num_hits] >= 1250 AND [num_hits] < 2500 )
+    STYLE
+       SYMBOL "circle"
+       SIZE 8
+
+      COLOR 229 134 114
+    END
+  END
+
+   CLASS
+    NAME ">2500"
+    EXPRESSION ( [num_hits] >= 2500 )
+    STYLE
+       SYMBOL "circle"
+       SIZE 8
+
+      COLOR 220 97 73
+    END
+  END
+
+ 
+ 
+  #draw all others gray
+#end layer woa05_temperature
+END
+  LEGEND
+    STATUS on
+    KEYSIZE 10 10
+    LABEL
+      SIZE 9
+      COLOR 0 0 0
+      TYPE truetype
+      FONT sans
+      FORCE false
+      PARTIALS true
+      POSITION AUTO
+    END
+    TEMPLATE "/var/www/gms-dev.megx.net/v3.1.0/geopfam_legend.html" # HTML template file
+  END

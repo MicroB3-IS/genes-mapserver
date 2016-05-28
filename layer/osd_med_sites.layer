@@ -1,0 +1,37 @@
+#
+# Layer OSD Mediterranean Sampling Sites
+#
+LAYER
+  NAME osd-med
+  TYPE POINT
+
+  INCLUDE "postgis-connection.inc"
+  DATA 'site_geom from web_r8.osd_samplingsites as t USING UNIQUE osd_id USING SRID=4326'
+
+  FILTER "osd_group='OSD-Med'"
+  LABELITEM "site_name" 
+
+  CLASS
+    NAME "OSD Sites"
+
+     STYLE
+       SYMBOL "star"
+       SIZE 32
+       #OUTLINECOLOR 255 255 255
+       COLOR 200 0 0
+     END
+     
+     LABEL
+      COLOR  200 0 0
+      FONT "sans"
+      TYPE truetype
+      SIZE 20
+      POSITION AUTO
+      MINFEATURESIZE AUTO
+      PARTIALS FALSE
+     END
+
+
+  END
+
+END

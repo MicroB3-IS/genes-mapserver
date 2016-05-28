@@ -1,0 +1,12 @@
+LAYER
+  NAME bathymetry
+
+  METADATA
+    "wms_title"   "Bathymetry"
+    "unit" "false"
+  END #end of wms metadata
+
+  DATA data/bathymetry
+  TYPE RASTER
+  STATUS OFF
+END

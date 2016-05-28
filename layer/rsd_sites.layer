@@ -1,0 +1,22 @@
+LAYER
+  NAME "rsd_sites"
+       CONNECTIONTYPE OGR
+       CONNECTION '<OGRVRTDataSource>
+        <OGRVRTLayer name="rsd_sites">
+        <SrcDataSource>/genes-mapserver/data/rsd_sites.csv</SrcDataSource>
+        <GeometryType>wkbPoint</GeometryType>
+        <LayerSRS>WGS84</LayerSRS>
+        <GeometryField encoding="PointFromColumns" x="Longitude"
+y="Latitude"/>
+    </OGRVRTLayer>
+</OGRVRTDataSource>' 
+    DATA rsd_sites
+    STATUS on
+    TYPE POINT
+  CLASS
+    NAME "site"
+    SYMBOL "circle"
+    SIZE 10
+    COLOR 0 200 0
+  END
+END  

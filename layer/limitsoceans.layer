@@ -1,0 +1,46 @@
+#
+#Layer Oceans limits
+#
+LAYER
+NAME limitsoceans
+
+  METADATA
+    "wms_title" "Limits of Ocean and Seas 1953"
+    "unit" "false"
+  END #end of wms metadata
+
+  INCLUDE "postgis-connection.inc"
+  DATA 'geom from elayers.ocean_limits using unique iho_id using srid=4326'
+  STATUS OFF
+  DEBUG ON
+  TYPE POLYGON
+  TOLERANCE 8
+  TOLERANCEUNITS pixels
+  LABELITEM 'label'
+  TRANSPARENCY 100
+
+  CLASS
+    MINSCALE 22196408
+    STYLE
+      #COLOR 0 102 255
+      OUTLINECOLOR 20 20 20
+    END
+  END
+
+  CLASS
+    STYLE
+      #COLOR 0 102 255
+      OUTLINECOLOR 20 20 20
+    END
+    LABEL
+      ANGLE auto
+      SIZE 10
+      COLOR 0 0 0
+      TYPE truetype
+      FONT arial
+      FORCE false
+      POSITION AUTO
+    END
+  END
+#end layer ocean limits
+END

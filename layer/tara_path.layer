@@ -1,0 +1,15 @@
+LAYER
+  NAME tara_path
+  TYPE LINE
+  DATA data/tara/tara_path
+  STATUS OFF
+  CLASS
+    NAME "TARA Path"
+    #OUTLINECOLOR 255 128 0
+    STYLE
+       SYMBOL "tent"
+       SIZE 5
+       COLOR 255 128 200
+    END
+  END
+END

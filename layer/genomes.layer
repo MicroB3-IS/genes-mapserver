@@ -1,0 +1,57 @@
+#
+# Layer genomes
+#
+LAYER
+  NAME genomes
+
+  METADATA
+    "wms_title"  "Microbial Genomes"
+    "wfs_title"  "Microbial Genomes WFS"
+    "wms_feature_info_mime_type" "text/html"
+    "gml_featureid" "label" ## REQUIRED
+    "gml_include_items" "all"  ## Optional (serves all attributes for layer)
+    "gml_geometries" "geom"
+    "gml_geom_type" "point"
+    "unit" "false"
+  END #end of wms metadata
+
+  INCLUDE "postgis-connection.inc"
+  DATA 'geom from web_r8.genomes as t USING UNIQUE sid USING SRID=4326'
+ 
+  STATUS ON
+  DUMP TRUE
+  TYPE POINT
+  TOLERANCE 8
+  TOLERANCEUNITS pixels
+  #TRANSPARENCY 60
+   LABELITEM entity_name
+
+
+   CLASS
+     NAME "Genomes"
+     # template for GetFeatureInfo request
+     TEMPLATE "etc/ssinfo.html"
+     #EXPRESSION "genome"
+     STYLE
+       SYMBOL "circle"
+       SIZE 5
+       #OUTLINECOLOR 255 255 255
+       COLOR 200 0 0
+     END
+
+     LABEL
+       ANGLE auto
+       SIZE 9
+       COLOR 0 0 0
+       TYPE truetype
+       FONT arial
+       FORCE false
+       PARTIALS true
+       POSITION AUTO
+     END
+   END
+
+
+
+#end layer sampling sites
+END

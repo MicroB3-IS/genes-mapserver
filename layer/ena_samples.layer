@@ -1,0 +1,105 @@
+#
+# Layer ENA samples
+#
+LAYER
+  NAME ena_samples
+  TYPE POINT
+  PROJECTION
+    #this is WGS84
+    "init=epsg:4326"
+  END
+
+
+  METADATA
+    "wms_title"  "ENA Sample Sites"
+    "wms_srs"             "EPSG:4326"
+    "wms_include_items" "all"  ## Optional (serves all attributes for layer)
+    "wms_feature_info_mime_type" "text/html"
+    "wfs_title"  "ENA Sample Sites WFS"
+
+    "gml_feature_info_mime_type"    "text/html"
+    "gml_featureid" "accession" ## REQUIRED
+    "gml_include_items" "all"  ## Optional (serves all attributes for layer)
+    "gml_geometries" "geom"
+    "gml_geom_type" "point"
+    "unit" "false"
+  END #end of wms metadata
+
+
+  INCLUDE "postgis-connection.inc"
+  DATA 'geom from stage_r8.ena_samples as t USING UNIQUE accession USING SRID=4326'
+
+  STATUS ON
+  DUMP TRUE
+  DEBUG ON
+  TOLERANCE 10
+  TOLERANCEUNITS pixels
+  
+
+  #LABELITEM "Cluster:FeatureCount" 
+  #CLASSITEM "Cluster:FeatureCount"
+
+  TEMPLATE "./etc/ena_samples_info.html"
+  HEADER './etc/query_header.html'
+  #FOOTER './etc/query_footer.html'
+
+  #CLUSTER
+  #  MAXDISTANCE 10
+  #  REGION "ellipse"
+  #END
+
+  CLASS
+    NAME "Clustered Samples"
+    #TEMPLATE "etc/ena_samples_info.html"
+    #EXPRESSION ("[Cluster:FeatureCount]" != "1")
+ 
+    STYLE
+      SYMBOL "circle"
+      SIZE 10
+      #OUTLINECOLOR 255 255 255
+      COLOR 200 0 0
+    END
+      LABEL
+      ANGLE auto
+      SIZE 9
+      COLOR 0 0 0
+      ALIGN CENTER
+      TYPE truetype
+      FONT arial
+      PRIORITY 10
+      BUFFER 1 
+      FORCE false
+      PARTIALS true
+      POSITION ur
+    END
+  END
+ 
+  CLASS
+    NAME "ENA Samples Site"
+    TEMPLATE "etc/ena_samples_info.html"
+    EXPRESSION ("[location]" != "")
+
+    STYLE
+      SYMBOL "circle"
+      SIZE 10
+      #OUTLINECOLOR 255 255 255
+      COLOR 200 0 200
+    END
+
+    TEXT "[accession]"
+
+    LABEL
+      FONT arial
+      TYPE TRUETYPE
+      SIZE 8
+      COLOR 0 0 0
+      OUTLINECOLOR 255 255 255
+      ALIGN CENTER
+      PRIORITY 9
+      BUFFER 1
+      PARTIALS FALSE
+      POSITION ur
+    END
+   END
+
+  END

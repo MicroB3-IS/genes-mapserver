@@ -1,0 +1,141 @@
+
+LAYER
+  NAME woa05_temperature
+  TYPE POLYGON
+  PROJECTION
+    #this is WGS84
+    "init=epsg:4326"
+  END
+ 
+
+  METADATA
+    "wms_title"                   "WOA 2005 Temperature"
+    "wms_srs"                     "EPSG:4326"
+    "wms_include_items"           "all"  ## Optional (serves all attributes for layer)
+    "wms_feature_info_mime_type"  "text/html"
+
+    "wfs_title"                   "WOA 2005 Temperature"
+    "gml_feature_info_mime_type"  "text/html"
+    "gml_include_items"           "all"  ## Optional (serves all attributes for layer)
+    "gml_geometries"              "geom"
+    "gml_geom_type"               "polygon"
+    "unit"                        "degrees Celsius"
+    "unit_html"                   "&deg; Celsius"
+  END #end of metadata
+
+
+  INCLUDE "postgis-connection.inc"
+
+  DATA "geom from web_r8.woa05_temperature using unique geom using srid=-1"
+
+  STATUS ON
+  DUMP TRUE
+  #DEBUG ON
+
+  VALIDATION
+    'SEASON'     '^[0-9][0-6]?$'
+    'DEPTH'      '^[0-9]+$'
+  END
+
+
+  FILTER "season='%SEASON%' and depth='%DEPTH%'"
+
+  #FILTER "season='1' and depth='0'"
+
+  CLASS
+    NAME "0"
+    EXPRESSION ( [val] < 0 )
+    STYLE
+      COLOR 255 255 255
+    END
+  END
+
+  CLASS
+    NAME ">0 - 5"
+    EXPRESSION ( [val] >=  0 AND [val] <5  )
+    STYLE
+      COLOR 251 240 237
+    END
+  END
+
+  CLASS
+    NAME ">5 - 10"
+    EXPRESSION ( [val] >= 5 AND [val] < 10 )
+    STYLE
+      COLOR 248 220 227
+    END
+  END
+
+  CLASS
+    NAME ">10 - 15"
+    EXPRESSION ( [val] >= 10 AND [val] < 15)
+    STYLE
+      COLOR 244 205 196
+    END
+  END
+
+  CLASS
+    NAME ">15 - 20"
+    EXPRESSION ( [val] >= 15 AND [val] < 20 )
+    STYLE
+      COLOR 238 171 155
+    END
+  END
+
+  CLASS
+    NAME ">20 - 22"
+    EXPRESSION ( [val] >= 20 AND [val] < 22 )
+    STYLE
+      COLOR 229 134 114
+    END
+  END
+
+  CLASS
+    NAME ">22 - 24"
+    EXPRESSION ( [val] >= 22 AND [val] < 24 )
+    STYLE
+      COLOR 220 97 73
+    END
+  END
+
+  CLASS
+    NAME ">24 - 26"
+    EXPRESSION ( [val] >= 24 AND [val] < 26 )
+    STYLE
+      COLOR 183 58 49
+    END
+  END
+
+  CLASS
+    NAME ">26 - 28"
+    EXPRESSION ( [val] >= 26 AND [val] < 28  )
+    STYLE
+      COLOR 146 19 25
+    END
+  END
+
+  CLASS
+    NAME ">28 - 30"
+    EXPRESSION ( [val] >= 28 AND [val] < 30 )
+    STYLE
+      COLOR 105 15 26
+    END
+  END
+
+  CLASS
+    NAME ">30"
+    EXPRESSION ( [val] > 30)
+    STYLE
+      COLOR 65 11 27
+    END
+  END
+
+  #draw all others gray
+  CLASS
+    NAME "No data"
+    STYLE
+      COLOR 210 210 210
+    END
+  END
+#end layer woa05_temperature
+END

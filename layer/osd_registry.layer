@@ -1,0 +1,66 @@
+#
+# Layer OSD Registry
+#
+LAYER
+  NAME osd_registry
+
+  METADATA
+    "wms_title"  "OSD Registry"
+    "wfs_title"  "OSD Registry WFS"
+    "wms_feature_info_mime_type" "text/html"
+    "gml_featureid" "osd_id" ## REQUIRED
+    "gml_include_items" "all"  ## Optional (serves all attributes for layer)
+    "gml_geometries" "site_geom"
+    "gml_site_geom_type" "point"
+    "unit" "false"
+  END #end of wms metadata
+
+  INCLUDE "postgis-connection.inc"
+  DATA 'site_geom from web_r8.osd_samplingsites as t USING UNIQUE osd_id USING SRID=4326'
+
+
+  TYPE POINT
+
+  PROJECTION
+    "init=epsg:4326"
+  END
+
+  STATUS ON
+
+  DUMP TRUE
+ 
+
+  CLASS
+    NAME "OSD Sites"
+    TEMPLATE "etc/osd_registry_info.html"
+
+    STYLE
+      SYMBOL "star"
+      SIZE 16
+      #OUTLINECOLOR 255 255 255
+      COLOR 0 0 255
+    END
+  END
+END
+
+LAYER
+  NAME osdRegistry
+  TYPE POINT
+
+  INCLUDE "postgis-connection.inc"
+  DATA 'site_geom from web_r8.osd_samplingsites as t USING UNIQUE osd_id USING SRID=4326'
+ 
+  CLASS
+    NAME "OSD Sites"
+     TEMPLATE "etc/osd_registry_info.html"
+     STYLE
+       SYMBOL "star"
+       SIZE 16
+       #OUTLINECOLOR 255 255 255
+       COLOR 255 165 0
+     END
+
+
+  END
+
+END

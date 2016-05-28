@@ -1,0 +1,29 @@
+#
+# Layer longhurst
+#
+LAYER
+  NAME longhurst
+
+ METADATA
+    "wms_title" "Longhurst"
+    "unit" "false"
+  END #end of wms metadata
+
+  INCLUDE "postgis-connection.inc"
+  DATA 'geom from marine_regions_stage.longhurst using unique gid using srid=4326'
+
+  EXTENT -180 -90 180 90
+
+  STATUS ON
+  
+  DEBUG 2
+  TYPE POLYGON
+  CLASS
+    STYLE
+      #COLOR 196 196 196
+      OUTLINECOLOR 0 0 0
+    END
+  END
+
+#end layer longhurst
+END

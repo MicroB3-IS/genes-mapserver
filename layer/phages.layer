@@ -1,0 +1,57 @@
+#
+# Layer phages
+#
+LAYER
+  NAME phages
+
+  METADATA
+    "wms_title"  "Marine Phages"
+    "wfs_title"  "Marine Phages WFS"
+    "wms_feature_info_mime_type" "text/html"
+    "gml_featureid" "label" ## REQUIRED
+    "gml_include_items" "all"  ## Optional (serves all attributes for layer)
+    "gml_geometries" "geom"
+    "gml_geom_type" "point"
+    "unit" "false"
+  END #end of wms metadata
+
+  INCLUDE "postgis-connection.inc"
+  DATA 'geom from web_r8.marine_phages t USING UNIQUE id USING SRID=4326'
+ 
+  STATUS ON
+  DUMP TRUE
+  TYPE POINT
+  TOLERANCE 8
+  TOLERANCEUNITS pixels
+  #TRANSPARENCY 60
+   LABELITEM entity_name
+
+
+   CLASS
+     NAME "Phages"
+     # template for GetFeatureInfo request
+     TEMPLATE "etc/ssinfo.html"
+
+     STYLE
+       SYMBOL "circle"
+       SIZE 5
+       #OUTLINECOLOR 255 255 255
+       COLOR 255 163 0
+     END
+
+     LABEL
+       ANGLE auto
+       SIZE 9
+       COLOR 0 0 0
+       TYPE truetype
+       FONT arial
+       FORCE false
+       PARTIALS true
+       POSITION AUTO
+     END
+   END
+
+
+
+#end layer phages
+END

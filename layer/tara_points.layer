@@ -1,0 +1,15 @@
+LAYER
+  NAME "tara_points"
+  TYPE POINT
+  DATA "data/tara/tara_points"
+  STATUS OFF
+  CLASS
+    NAME "TARA Points"
+    #OUTLINECOLOR 255 128 0
+    STYLE
+       SYMBOL "circle"
+       SIZE 7
+       COLOR 255 128 0
+    END
+  END
+END

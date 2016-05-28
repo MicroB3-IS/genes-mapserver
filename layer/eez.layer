@@ -1,0 +1,23 @@
+LAYER
+  NAME eez
+  TYPE POLYGON
+  DATA data/EEZ_land_v1
+  STATUS OFF
+  LABELITEM "Country"
+
+  CLASS
+    NAME "Country"
+    OUTLINECOLOR 0 0 0
+    LABEL
+      COLOR  0 0 0
+      #OUTLINECOLOR 255 255 255
+      FONT "sans"
+      TYPE truetype
+      SIZE 8
+      POSITION AUTO
+      MINFEATURESIZE AUTO
+      PARTIALS FALSE
+    END
+
+  END
+END

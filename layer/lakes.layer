@@ -1,0 +1,24 @@
+#
+#Layer lakes
+#
+LAYER
+  NAME lakes
+
+  METADATA
+    "wms_title" "Lakes"
+    "unit" "false"
+  END #end of wms metadata
+
+  INCLUDE "postgis-connection.inc"
+  DATA 'the_geom from mflayers.lakes using unique gid using srid=-1'
+  STATUS OFF
+  DEBUG ON
+  TYPE POLYGON
+  CLASS
+    STYLE
+      COLOR 0 102 255
+      OUTLINECOLOR 0 51 204
+    END
+  END
+#end layer 
+END

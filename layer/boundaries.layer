@@ -1,0 +1,29 @@
+#
+# Layer boundaries
+#
+LAYER
+  NAME boundaries
+
+ METADATA
+    "wms_title" "Boundaries"
+    "unit" "false"
+  END #end of wms metadata
+
+  INCLUDE "postgis-connection.inc"
+  DATA 'the_geom from mflayers.boundaries using unique gid using srid=-1'
+
+  EXTENT -180 -90 180 90
+
+  STATUS ON
+  
+  DEBUG 2
+  TYPE POLYGON
+  CLASS
+    STYLE
+      COLOR 196 196 196
+      OUTLINECOLOR 0 0 0
+    END
+  END
+
+#end layer boundaries
+END

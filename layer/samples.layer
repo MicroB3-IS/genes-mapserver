@@ -1,0 +1,83 @@
+#
+# Layer samples
+#
+LAYER
+  NAME samples
+  ##GROUP show
+  METADATA
+    "wms_title"  "Samples"
+    "wfs_title"  "Sampling Sites WFS"
+    "wms_feature_info_mime_type" "text/html"
+    "gml_featureid" "label" ## REQUIRED
+    "gml_include_items" "all"  ## Optional (serves all attributes for layer)
+    "gml_geometries" "geom"
+    "gml_geom_type" "point"
+    "unit" "false"
+  END #end of wms metadata
+
+  INCLUDE "postgis-connection.inc"
+  DATA 'geom from web_r8.gms_samples as t USING UNIQUE sid USING SRID=4326'
+ 
+  CLUSTER
+     MAXDISTANCE 50  # in pixels
+     REGION "ellipse"  # can be rectangle or ellipse
+     #GROUP (expression)  # an expression to create separate groups for each value
+     #FILTER (expression) # a logical expression to specify the grouping condition
+  END
+
+  LABELITEM "Cluster:FeatureCount"
+  CLASSITEM "Cluster:FeatureCount"
+
+  STATUS DEFAULT
+  TYPE POINT
+  TOLERANCE 8
+  TOLERANCEUNITS pixels
+
+  VALIDATION
+
+    'RRNAS'     '^[a-zA-Z]+$'
+    'GENOMES'     '^[a-zA-Z\-]+$'
+    'METAGENOMES'     '^[a-zA-Z\-]+$'
+    'PHAGES'     '^[a-zA-Z\-]+$'
+  END
+
+  CLASS
+     NAME "Samples"
+     # template for GetFeatureInfo request
+     TEMPLATE "/var/www/trunk.megx.net//gms/etc/ssinfo.html"
+    EXPRESSION ("[Cluster:FeatureCount]" != "1")
+     STYLE
+       SYMBOL "circle"
+       SIZE 8
+       #OUTLINECOLOR 255 255 255
+       COLOR 200 0 0
+     END
+
+     LABEL
+       ANGLE auto
+       SIZE 9
+       COLOR 0 0 0
+       TYPE truetype
+       FONT arial
+       ENCODING UTF-8
+       FORCE false
+       PARTIALS true
+       POSITION AUTO
+     END
+   END
+
+
+  CLASS
+    NAME "Single Sample"
+    EXPRESSION "1"
+    # TEMPLATE for GetFeatureInfo request
+    TEMPLATE "/var/www/trunk.megx.net//gms/etc/ssinfo.html"
+    STYLE
+      SYMBOL "circle"
+      SIZE 5
+      OUTLINECOLOR 255 255 255
+      COLOR 255 255 0
+    END
+  END
+#end layer samples sites
+END

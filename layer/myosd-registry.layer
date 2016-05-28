@@ -1,0 +1,45 @@
+#
+# Layer MyOSD Registry
+#
+LAYER
+  NAME myosd-registry
+
+  METADATA
+    "wms_title"  "MyOSD Registry WMS"
+    "wfs_title"  "MyOSD Registry WFS"
+    "wfs_srs" "EPSG:4326" 
+    "wms_feature_info_mime_type" "text/html"
+    "gml_featureid" "id" ## REQUIRED
+    "gml_include_items" "all"  ## Optional (serves all attributes for layer)
+    "gml_geometries" "geom"
+    "gml_site_geom_type" "point"
+    "unit" "false"
+  END #end of metadata
+
+  INCLUDE "postgis-connection.inc"
+  DATA 'geom from myosd.registrations as t USING UNIQUE id USING SRID=4326'
+
+
+  TYPE POINT
+
+  PROJECTION
+    "init=epsg:4326"
+  END
+
+  STATUS ON
+
+  DUMP TRUE
+ 
+
+  CLASS
+    NAME "MyOSD Sites"
+    TEMPLATE "etc/osd_registry_info.html"
+
+    STYLE
+      SYMBOL "star"
+      SIZE 16
+      #OUTLINECOLOR 255 255 255
+      COLOR 0 0 255
+    END
+  END
+END

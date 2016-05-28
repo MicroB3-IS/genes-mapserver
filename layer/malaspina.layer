@@ -1,0 +1,24 @@
+#
+# Layer Malaspina Sampling Sites
+#
+LAYER
+  NAME malaspina
+  TYPE POINT
+
+  INCLUDE "postgis-connection.inc"
+  DATA 'geom from web_r8.malaspina_samplingsites as t USING UNIQUE geom USING SRID=4326'
+ 
+  CLASS
+    NAME "Malaspina Site"
+
+     STYLE
+       SYMBOL "circle"
+       SIZE 7
+       #OUTLINECOLOR 255 255 255
+       COLOR 200 0 0
+     END
+
+
+  END
+
+END

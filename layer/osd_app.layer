@@ -1,0 +1,104 @@
+
+
+#
+# Layer OSD App
+#
+LAYER
+  NAME osd_app
+  ##GROUP show
+  METADATA
+    "wms_title"  "OSD App Sites"
+    "wfs_title"  "OSD App Sites WFS"
+    "wms_feature_info_mime_type" "text/html"
+    "gml_featureid" "id" ## REQUIRED
+    "gml_include_items" "all"  ## Optional (serves all attributes for layer)
+    "gml_geometries" "geom"
+    "gml_geom_type" "point"
+    "unit" "false"
+  END #end of wms metadata
+
+  INCLUDE "postgis-connection.inc"
+  DATA 'geom from esa.samples as t USING UNIQUE id USING SRID=4326'
+ 
+  TYPE POINT
+  TOLERANCE 16
+  TOLERANCEUNITS pixels
+ 
+  STATUS ON
+  DUMP TRUE 
+
+  DEBUG 5
+
+
+  LABELITEM "Cluster:FeatureCount" 
+  CLASSITEM "Cluster:FeatureCount"
+
+  CLUSTER
+    MAXDISTANCE 10
+    REGION "ellipse"
+  END
+  #
+  # need to explicitly declare which DB attributes to be processed, becasue of clustering
+  PROCESSING "CLUSTER_GET_ALL_SHAPES=true"
+  PROCESSING "ITEMS=biome,salinity,water_temperature,taken,user_name"
+   
+  TEMPLATE "etc/osd_app_info.html"     
+
+  CLASS
+     NAME "Clustered Samples"
+
+     EXPRESSION ("[Cluster:FeatureCount]" != "1")
+     STYLE
+       SYMBOL "circle"
+       SIZE 18
+       #OUTLINECOLOR 255 255 255
+       COLOR 200 0 0
+     END
+ 
+     LABEL
+       ANGLE auto
+       SIZE 9
+       COLOR 0 0 0
+       ALIGN CENTER
+       TYPE truetype
+       FONT arial
+       PRIORITY 10
+       BUFFER 1 
+       FORCE false
+       PARTIALS true
+       POSITION cc
+     END
+   END
+   ################################
+   # Class2: For the single station
+   ################################
+   CLASS
+     NAME "OSD Observation Site"
+     EXPRESSION "1"
+
+
+     STYLE
+       SYMBOL "circle"
+       SIZE 12
+       COLOR 0 200 0
+
+     END
+
+     TEXT "[label]"
+
+     LABEL
+        FONT arial
+        TYPE TRUETYPE
+        SIZE 8
+        COLOR 0 0 0
+        OUTLINECOLOR 255 255 255
+        ALIGN CENTER
+        PRIORITY 9
+        BUFFER 1
+        PARTIALS FALSE
+        POSITION ur
+      END
+    END
+
+
+END

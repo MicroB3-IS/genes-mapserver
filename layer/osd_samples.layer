@@ -1,0 +1,23 @@
+#
+# Layer OSD Sampling Sites
+#
+LAYER
+  NAME osd_samples
+  TYPE POINT
+
+  INCLUDE "postgis-connection.inc"
+  DATA 'start_geom from web_r8.osd_samples as t USING UNIQUE submission_id USING SRID=4326'
+ 
+  CLASS
+    NAME "OSD Samples"
+
+     STYLE
+       SYMBOL "star"
+       SIZE 16
+       #OUTLINECOLOR 255 255 255
+       COLOR 0 0 200
+     END
+
+  END
+
+END

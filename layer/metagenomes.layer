@@ -1,0 +1,72 @@
+#
+# Layer metagenomes
+#
+LAYER
+  NAME metagenomes
+
+  METADATA
+    "wms_title"  "Microbial Metagenomes"
+    "wfs_title"  "Microbial Metagenomes WFS"
+    "wms_feature_info_mime_type" "text/html"
+    "gml_featureid" "label" ## REQUIRED
+    "gml_include_items" "all"  ## Optional (serves all attributes for layer)
+    "gml_geometries" "geom"
+    "gml_geom_type" "point"
+    "unit" "false"
+  END #end of wms metadata
+
+  INCLUDE "postgis-connection.inc"
+  DATA 'geom from web_r8.metagenomes as t USING UNIQUE sid USING SRID=4326'
+ 
+  STATUS ON
+  DUMP TRUE
+
+  TYPE POINT
+  TOLERANCE 10
+  TOLERANCEUNITS pixels
+
+  PROJECTION
+    "init=epsg:4326"
+  END
+
+  #TRANSPARENCY 60
+  #LABELITEM entity_name
+
+
+   CLASS
+     NAME "Metagenomes"
+     # template for GetFeatureInfo request
+     TEMPLATE "etc/ssinfo.html"
+    #EXPRESSION "metagenome"
+     STYLE
+       SYMBOL "circle"
+       SIZE 7
+       #OUTLINECOLOR 255 255 255
+       COLOR 255 223 0
+     END
+
+     LABEL
+       ANGLE auto
+       SIZE 9
+       COLOR 0 0 0
+       TYPE truetype
+       FONT arial
+       FORCE false
+       PARTIALS true
+       POSITION AUTO
+     END
+   END
+
+
+  CLASS
+    # template for GetFeatureInfo request
+    TEMPLATE "etc/ssinfo.html"
+    STYLE
+      SYMBOL "circle"
+      SIZE 8
+      OUTLINECOLOR 255 255 255
+      COLOR 255 0 0
+    END
+  END
+#end layer sampling sites
+END
