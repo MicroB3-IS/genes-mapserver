@@ -1,0 +1,16 @@
+build/
+README.html
+# most prob to be deleted soon
+data/bathymetry*
+v3.2.0/
+.metadata
+tmp/
+*.tmp
+*.bak
+*.swp
+.settings/
+*.project
+*.classpath
+*.prefs
+*.min.js
+*.min.css
