@@ -12,7 +12,7 @@ LAYER
     "gml_featureid" "id" ## REQUIRED
     "gml_include_items" "all"  ## Optional (serves all attributes for layer)
     "gml_geometries" "geom"
-    "gml_site_geom_type" "point"
+    "gml_geom_type" "point"
     "unit" "false"
   END #end of metadata
 
