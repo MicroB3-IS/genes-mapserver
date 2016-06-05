@@ -45,6 +45,8 @@ function usage() {
 Usage: $0
  -b build dir: Directory where files get created
  -c PotsgreSQL conenction string using mapserver syntax
+ -d the internet domain url under which this instance will be accesible.
+    By default http://localhost
  -h this help
 EOF
 }
@@ -58,10 +60,11 @@ function main() {
     #after "h". The leading ":" suppresses error messages from
     #getopts. This is required to get unrecognized option code to
     #work.
-    local -r OPTS=':hb:c:'
+    local -r OPTS=':hb:c:d:'
     
     declare -g BUILD_DIR=${WORK_DIR}/build
     declare -g PG_CONNECTION=""
+    declare -gx DOMAIN_URL="http://localhost"
     
     while builtin getopts ${OPTS} opt "${@}"; do
 	
@@ -74,7 +77,12 @@ function main() {
 		declare -grx PG_CONNECTION=${OPTARG}
 		[[ -n ${OPTARG} ]] \
 		    || ex_err "You have to define PostgreSQL database conenction using same syntax as mapserver requires"
-	       ;;
+		;;
+	    d) declare -grx DOMAIN_URL=${OPTARG}
+	       [[ -n ${OPTARG} ]] \
+		   || ex_err "You have to define the domain url"
+		;;
+	    
 	    h) usage ; exit 0
 	       ;;
 	    
@@ -101,11 +109,15 @@ function main() {
     
     #rsync -zvr data  "${BUILD_DIR}"/data
     
-    cp -R etc/ layer/ template/ "${BUILD_DIR}"
+    cp -R etc/ layer/ template/ doc-root/ "${BUILD_DIR}"
 
     envsubst < postgis-connection.inc > "${BUILD_DIR}"/postgis-connection.inc
-    
-    cp *.map  "${BUILD_DIR}"
+
+    echo "url=${DOMAIN_URL}"
+    for file in *.map; do
+	envsubst < "${file}" > "${BUILD_DIR}"/"${file}"
+    done
+
     
     cleanup
     

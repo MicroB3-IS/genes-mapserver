@@ -17,17 +17,17 @@ MAP
     "init=epsg:4326"
   END
 
-
+ 
   SYMBOLSET "etc/symbols.sym"
   FONTSET "etc/fonts/fonts.txt"
 
   WEB
-    IMAGEPATH "/tmp"
-    IMAGEURL "http://gms-dev.megx.net/tmp/"
+    IMAGEPATH "/tmp/"
+    IMAGEURL "${DOMAIN_URL}/tmp/"
 
-    ERROR "http://gms-dev.megx.net/v3.2.0/gms_error.html"
-    EMPTY "http://gms-dev.megx.net/v3.2.0/gms_no_result.html"
-
+    ERROR "${DOMAIN_URL}/gms-error.html"
+    EMPTY "${DOMAIN_URL}/gms-no-result.html"
+ 
     TEMPLATE "etc/osd_registry_info.html"
 
     METADATA
