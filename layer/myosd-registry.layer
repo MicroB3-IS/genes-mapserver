@@ -10,7 +10,7 @@ LAYER
     "wfs_srs" "EPSG:4326" 
     "wms_feature_info_mime_type" "text/html"
     "gml_featureid" "id" ## REQUIRED
-    "gml_include_items" "all"  ## Optional (serves all attributes for layer)
+    "gml_include_items" "myosd_id,user_name,place_name,lat,lon"  ## Optional (serves all attributes for layer)
     "gml_geometries" "geom"
     "gml_geom_type" "point"
     "unit" "false"
