@@ -82,7 +82,7 @@ MAP
 #  INCLUDE "genomes.layer"
 #  INCLUDE "geo_pfam.layer"
 #  INCLUDE "lakes.layer"
-#  INCLUDE "limitsoceans.layer"
+   INCLUDE "layer/limitsoceans.layer"
    INCLUDE "layer/longhurst.layer"
    INCLUDE "layer/malaspina.layer"
    INCLUDE "layer/metagenomes.layer"

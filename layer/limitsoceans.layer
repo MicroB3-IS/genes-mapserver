@@ -10,13 +10,13 @@ NAME limitsoceans
   END #end of wms metadata
 
   INCLUDE "postgis-connection.inc"
-  DATA 'geom from elayers.ocean_limits using unique iho_id using srid=4326'
+  DATA "geom from elayers.ocean_limits using unique iho_id using srid=4326"
   STATUS OFF
   DEBUG ON
   TYPE POLYGON
   TOLERANCE 8
   TOLERANCEUNITS pixels
-  LABELITEM 'label'
+  LABELITEM "label"
   TRANSPARENCY 100
 
   CLASS
