@@ -33,7 +33,7 @@ MAP
     METADATA
       ### Enable WFS support
       "wms_title"           "Genes Mapserver WMS 3.2.0"
-      "wms_onlineresource"  "http://lohost/cgi-bin/mapserv?map=/genes/mapserver/test.map"
+      "wms_onlineresource"  "${DOMAIN_URL}/map/gms"
       "wms_srs"             "EPSG:4326"
       "wms_enable_request"  "GetCapabilities GetMap GetFeatureInfo GetLegendGraphic GetFeature"
       "ows_enable_request"  "GetCapabilities GetMap GetFeatureInfo GetLegendGraphic GetFeature"
@@ -87,7 +87,7 @@ MAP
    INCLUDE "layer/malaspina.layer"
    INCLUDE "layer/metagenomes.layer"
    INCLUDE "layer/myosd-registry.layer"
-#  INCLUDE "osd_app.layer"
+   INCLUDE "layer/osd_app.layer"
 #  INCLUDE "osd_med_sites.layer"
 #  INCLUDE "osd_registry.layer"
    INCLUDE "layer/osd_samples.layer"
