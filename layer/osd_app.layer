@@ -1,5 +1,3 @@
-
-
 #
 # Layer OSD App
 #
@@ -9,6 +7,7 @@ LAYER
   METADATA
     "wms_title"  "OSD App Sites"
     "wfs_title"  "OSD App Sites WFS"
+    "wfs_srs" "EPSG:4326" 
     "wms_feature_info_mime_type" "text/html"
     "gml_featureid" "id" ## REQUIRED
     "gml_include_items" "all"  ## Optional (serves all attributes for layer)
@@ -16,7 +15,7 @@ LAYER
     "gml_geom_type" "point"
     "unit" "false"
   END #end of wms metadata
-
+ 
   INCLUDE "postgis-connection.inc"
   DATA 'geom from esa.samples as t USING UNIQUE id USING SRID=4326'
  
@@ -38,7 +37,7 @@ LAYER
     REGION "ellipse"
   END
   #
-  # need to explicitly declare which DB attributes to be processed, becasue of clustering
+  # need to explicitly declare which DB attributes to be processed, because of clustering
   PROCESSING "CLUSTER_GET_ALL_SHAPES=true"
   PROCESSING "ITEMS=biome,salinity,water_temperature,taken,user_name"
    
@@ -99,6 +98,4 @@ LAYER
         POSITION ur
       END
     END
-
-
 END
