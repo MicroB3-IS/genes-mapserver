@@ -88,15 +88,15 @@ MAP
    INCLUDE "layer/metagenomes.layer"
    INCLUDE "layer/myosd-registry.layer"
    INCLUDE "layer/osd_app.layer"
-#  INCLUDE "osd_med_sites.layer"
-#  INCLUDE "osd_registry.layer"
+   INCLUDE "layer/osd_med_sites.layer"
+   INCLUDE "layer/osd_registry.layer"
    INCLUDE "layer/osd_samples.layer"
 #  INCLUDE "phages.layer"
 #  INCLUDE "rdnas.layer"
    INCLUDE "layer/rsd_sites.layer"
 #  INCLUDE "layer/samples.layer"
 #  INCLUDE "layer/samplingsites.layer"
-  INCLUDE "layer/satellite.layer"
+   INCLUDE "layer/satellite.layer"
    INCLUDE "layer/tara_points.layer"
 
 
