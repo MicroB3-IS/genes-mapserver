@@ -2,6 +2,7 @@
 # Layer MyOSD Registry
 #
 LAYER
+
   NAME myosd-registry
 
   METADATA
