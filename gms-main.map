@@ -1,0 +1,98 @@
+MAP
+
+  NAME "Genes Mapserver v3.2.0"
+  STATUS ON
+  EXTENT -180 -90 180 90
+  IMAGECOLOR 210 210 210
+  IMAGETYPE png
+  SIZE 1080 614
+  UNITS dd
+
+  CONFIG "MS_ERRORFILE" "/var/www/gms-dev.megx.net/error-v3.2.0.txt"
+  DEBUG 5
+  
+
+  PROJECTION
+    #this is WGS84
+    "init=epsg:4326"
+  END
+
+
+  SYMBOLSET /var/www/gms-dev.megx.net/v3.2.0/symbols/symbols.sym
+  FONTSET /var/www/gms-dev.megx.net/v3.2.0/fonts/fonts.txt
+
+  WEB
+    IMAGEPATH /var/www/gms-dev.megx.net/tmp/
+    IMAGEURL "http://gms-dev.megx.net/tmp/"
+
+    ERROR "http://gms-dev.megx.net/v3.2.0/gms_error.html"
+    EMPTY "http://gms-dev.megx.net/v3.2.0/gms_no_result.html"
+
+
+    METADATA
+      ### Enable WFS support
+      "wms_title"           "Genes Mapserver WMS 3.2.0"
+      "wms_onlineresource"  "http://mb3is.megx.net/wms?"
+      "wms_srs"             "EPSG:4326"
+      "wms_enable_request"  "GetCapabilities GetMap GetFeatureInfo GetLegendGraphic"
+      "ows_enable_request"  "GetCapabilities GetMap GetFeatureInfo GetLegendGraphic"
+
+      "wfs_title"           "Genes Mapserver WFS 3.2.0"
+      #necessary for the WMS GetFeatureInfo request
+      "WMS_FEATURE_INFO_MIME_TYPE" "text/html"
+    END
+
+  END
+
+  LEGEND
+    STATUS on
+    KEYSIZE 10 10
+    LABEL
+      SIZE 9
+      COLOR 0 0 0
+      TYPE truetype
+      FONT sans
+      FORCE false
+      PARTIALS true
+      POSITION AUTO
+    END
+    TEMPLATE "/var/www/gms-dev.megx.net/current/legend.html" # HTML template file
+  END
+
+# Performance hints: for layers: EXTENT [minx] [miny] [maxx] [maxy]
+# The spatial extent of the data. In most cases you will not need to
+# specify this, but it can be used to avoid the speed cost of having
+# MapServer compute the extents of the data. An application can also
+# possibly use this value to override the extents of the map.
+
+
+  #Layers in ALPHABETICAL order
+  INCLUDE "bathymetry.layer"
+  INCLUDE "boundaries.layer"
+  INCLUDE "coordinates.layer"
+  INCLUDE "eez.layer"
+  INCLUDE "ena_samples.layer"
+  INCLUDE "genomes.layer"
+  INCLUDE "geo_pfam.layer"
+  INCLUDE "lakes.layer"
+  INCLUDE "limitsoceans.layer"
+  INCLUDE "malaspina.layer"
+  INCLUDE "metagenomes.layer"
+  INCLUDE "osd_app.layer"
+  INCLUDE "osd_sites.layer"
+  INCLUDE "osd_med_sites.layer"
+  INCLUDE "osd_registry.layer"
+  INCLUDE "phages.layer"
+  INCLUDE "rdnas.layer"
+  INCLUDE "samples.layer"
+  INCLUDE "samplingsites.layer"
+  INCLUDE "satellite.layer"
+  INCLUDE "tara_points.layer"
+  INCLUDE "woa05_temperature.layer"
+
+
+
+  #  INCLUDE "postgis-connection.inc"
+
+#map end
+END

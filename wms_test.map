@@ -1,0 +1,80 @@
+MAP
+
+  NAME "wms_test"
+  STATUS ON
+  EXTENT -180 -90 180 90
+  IMAGECOLOR 210 210 210
+  IMAGETYPE png
+  SIZE 1080 614
+  UNITS dd
+
+  CONFIG "MS_ERRORFILE" "/tmp/wms_test_error.txt"
+  DEBUG 2
+  
+
+  PROJECTION
+    #this is WGS84
+    "init=epsg:4326"
+  END
+
+
+  SYMBOLSET "etc/symbols.sym"
+  FONTSET "etc/fonts/fonts.txt"
+
+  WEB
+    IMAGEPATH "/tmp/"
+    IMAGEURL "/tmp"
+
+    ERROR "/error.html"
+    EMPTY "/no_result.html"
+
+
+    METADATA
+      ### Enable WFS support
+      "wms_title"           "wms test"
+      "wms_onlineresource"  "http://localhost/wms?"
+      "wms_srs"             "EPSG:4326"
+      "wms_enable_request"  "GetCapabilities GetMap GetFeatureInfo GetLegendGraphic"
+      "ows_enable_request"  "GetCapabilities GetMap GetFeatureInfo GetLegendGraphic"
+      "ows_extent" "-180 -90 180 90"
+      "wfs_title"           "wfs test"
+      #necessary for the WMS GetFeatureInfo request
+      "WMS_FEATURE_INFO_MIME_TYPE" "text/html"
+    END
+
+  END
+
+  LEGEND
+    STATUS on
+    KEYSIZE 10 10
+    LABEL
+      SIZE 9
+      COLOR 0 0 0
+      TYPE truetype
+      ENCODING UTF-8
+      FONT sans
+      FORCE false
+      PARTIALS true
+      POSITION AUTO
+    END
+    TEMPLATE "template/legend.html" # HTML template file
+  END
+
+LAYER
+  NAME satellite_mod
+
+  METADATA
+    "wms_title"     "World Map Lite"
+    "unit"          "false"
+  END #end of wms metadata
+
+  DATA data/satelliteMod.png
+  TYPE RASTER
+  STATUS ON
+END
+
+
+
+#map end
+END
+sudo docker run --net=host -v /home/renzo/src/genes-mapserver/:/genes-mapserver --rm renzok/mapserver-cgi  
